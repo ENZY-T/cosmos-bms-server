@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Cosmos_bms_Functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7163",
+      "launchBrowser": false
+    }
+  }
+}
