@@ -9,12 +9,13 @@ namespace cosmos_bms_server.Services
 {
     public static class AzureSignalRClient
     {
+        private static readonly string functionAppUrl = "https://cosmos-bms-functions.azurewebsites.net";
         private static readonly HubConnection connection;
 
         static AzureSignalRClient()
         {
             connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:7163/api")
+                .WithUrl(functionAppUrl + "/api")
                 .Build();
 
 
@@ -36,7 +37,7 @@ namespace cosmos_bms_server.Services
                 Logger.Log("Failed connection\n\n Error:\n" + ex.Message);
             }
         }
-        
+
         private static void OnReceiveState(string message)
         {
             Logger.Log(message);

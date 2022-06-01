@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cosmos-bms-server", "cosmos-bms-server\cosmos-bms-server.csproj", "{671F490D-3A16-4B13-AEA4-9586CBDF94FB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E57E54D0-7C4C-440A-ADF9-FCBD78933A73} = {E57E54D0-7C4C-440A-ADF9-FCBD78933A73}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos-bms-Functions", "Cosmos-bms-Functions\Cosmos-bms-Functions.csproj", "{E57E54D0-7C4C-440A-ADF9-FCBD78933A73}"
 EndProject
