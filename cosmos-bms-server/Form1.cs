@@ -1,4 +1,5 @@
 using cosmos_bms_server.Services;
+using System.Diagnostics;
 
 namespace cosmos_bms_server
 {
@@ -11,7 +12,9 @@ namespace cosmos_bms_server
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            await Firebase.SendMessageAsync(txtState.Text);
+            string[] result = await Firebase.SendMessageAsync(txtState.Text);
+            Debug.WriteLine(result[0]);
+            Debug.WriteLine(result[1]);
 
         }
 

@@ -29,11 +29,11 @@ namespace cosmos_bms_server.Services
             }
         }
 
-        public static FirebaseAdmin.Messaging.Message CreateMessage(string title, string body, string state)
+        public static FirebaseAdmin.Messaging.Message CreateNotificationMessage(string title, string body, string state)
         {
             FirebaseAdmin.Messaging.Message message = new FirebaseAdmin.Messaging.Message()
             {
-                Topic = "bms-state",
+                Topic = "bms-state-alert",
                 Notification = new Notification() { Title = title, Body = body },
                 Data = new Dictionary<string, string>()
                 {
@@ -53,10 +53,34 @@ namespace cosmos_bms_server.Services
             return message;
         }
 
-        public static async Task<string> SendMessageAsync(string state)
+
+        public static FirebaseAdmin.Messaging.Message CreateDataMessage(string state)
         {
-            FirebaseAdmin.Messaging.Message message = CreateMessage("Survailance alert !", "Motion Detected on a sensor !", state);
-            return await FirebaseMessaging.DefaultInstance.SendAsync(message);
+            FirebaseAdmin.Messaging.Message message = new FirebaseAdmin.Messaging.Message()
+            {
+                Topic = "bms-state-data",
+                Data = new Dictionary<string, string>()
+                {
+                    { "title", "State"},
+                    { "body", state },
+                },
+                Android = new AndroidConfig()
+                {
+                    Priority = Priority.High,
+                },
+            };
+
+            return message;
+        }
+
+        public static async Task<string[]> SendMessageAsync(string state)
+        {
+            FirebaseAdmin.Messaging.Message notification = CreateNotificationMessage("Survailance alert !", "Motion Detected on a sensor !", state);
+            FirebaseAdmin.Messaging.Message dataMessage = CreateDataMessage(state);
+
+            string datamessageId = await FirebaseMessaging.DefaultInstance.SendAsync(notification);
+            string notificationId = await FirebaseMessaging.DefaultInstance.SendAsync(dataMessage);
+            return new string[] { datamessageId, notificationId };
         }
 
         public static void ListenToTopic()
