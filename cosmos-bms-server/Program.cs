@@ -15,7 +15,8 @@ namespace cosmos_bms_server
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            //System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(AzureSignalRManagement).TypeHandle);
+            Logger.Log("test");
+
             System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(AzureSignalRClient).TypeHandle);
 
             Application.Run(new Form1());

@@ -9,13 +9,13 @@ namespace cosmos_bms_server.Services
 {
     public static class AzureSignalRClient
     {
-        private static readonly string functionAppUrl = "https://cosmos-bms-functions.azurewebsites.net";
+        private static readonly string functionAppUrl = "https://cosmos-bms.azurewebsites.net";
         private static readonly HubConnection connection;
 
         static AzureSignalRClient()
         {
             connection = new HubConnectionBuilder()
-                .WithUrl(functionAppUrl + "/api")
+                .WithUrl(functionAppUrl +"/api")
                 .Build();
 
 
@@ -29,6 +29,7 @@ namespace cosmos_bms_server.Services
         {
             try
             {
+                connection.HandshakeTimeout = new TimeSpan(0,0,3);
                 connection.StartAsync().Wait();
                 Logger.Log("Connected to the server");
             }
